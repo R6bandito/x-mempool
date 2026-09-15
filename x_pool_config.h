@@ -4,9 +4,8 @@
 #include <stdint.h>
 
 
-#define RAM_ADDRESS     (0x10000000ul)
+/* ******************************************************************************** */
 #define RAM_SIZE        (1024 * 64)
-
 
 /* Critical section hooks for xpool_alloc/xpool_free. Override these to match
  * your environment, e.g. FreeRTOS:
@@ -24,12 +23,10 @@
 	#define XPOOL_EXIT_CRITICAL()	do { __enable_irq(); } while (0)
 #endif
 
-
 /* Optional. */
 #if (1)
 	#define POOL_SECTION    ".ccmram"
 #endif 
-
 
 /* This is default setting. */
 #define DEFAULT_BLOCK_SIZE  (512ul)
@@ -38,5 +35,15 @@
 #define MEM_POOL_LIST   \
 	X(DEFAULT, DEFAULT_BLOCK_SIZE, DEFAULT_BLOCK_NUM)
 
+/* ******************************************************************************** */
+
+#define MIN_ALIGNED			(8u)
+#define MIN_HEAP			(32u)
+#define HEAP_SIZE			(32 * 1024)
+#define ALIGNx(x)			(((x) + (MIN_ALIGNED - 1)) & ~(MIN_ALIGNED - 1))
+
+#if (0)
+	#define HEAP_SECTION	".ccmram"
+#endif 
 
 #endif /* __XPOOL_CONF_H__ */

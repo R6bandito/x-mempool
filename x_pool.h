@@ -18,5 +18,9 @@ void xpool_init( void );
 void *xpool_alloc( pool_id_t type );
 void xpool_free( void *block, pool_id_t type );
 
+void xheap_init( void );
+void *xheap_alloc( uint32_t size );
+void xheap_free( void *block );
+
 
 #endif /* __XPOOL_H__ */
